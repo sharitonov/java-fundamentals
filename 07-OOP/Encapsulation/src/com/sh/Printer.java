@@ -1,9 +1,7 @@
-package com.sh;
-
 public class Printer {
     private int tonerLevel;
-    private int printedPages;
-    private boolean isDuplex;
+    private int pagesPrinted;
+    private boolean duplex;
 
     public Printer(int tonerLevel, boolean isDuplex) {
         if (tonerLevel >- 1 && tonerLevel <= 100) {
@@ -11,8 +9,8 @@ public class Printer {
         } else {
             this.tonerLevel = -1;
         }
-        this.isDuplex = isDuplex;
-        this.printedPages = 0;
+        this.duplex = isDuplex;
+        this.pagesPrinted = 0;
     }
 
     public int addToner(int tonerAmount) {
@@ -27,17 +25,18 @@ public class Printer {
         }
     }
 
-    public int print(int pages) {
+    public int printPages(int pages) {
         int pagesToPrint = pages;
-        if (this.isDuplex) {
-            pagesToPrint /= 2;
-            System.out.println("Printing in duplex mode.");
+        if (this.duplex) {
+            pagesToPrint = (pages/2) + (pages % 2);
+            System.out.println(pagesToPrint);
         }
-        this.printedPages += pagesToPrint;
+        this.pagesPrinted += pagesToPrint;
+        System.out.println("Hi "+pagesToPrint);
         return pagesToPrint;
     }
 
-    public int getPrintedPages() {
-        return printedPages;
+    public int getPagesPrinted() {
+        return pagesPrinted;
     }
 }
